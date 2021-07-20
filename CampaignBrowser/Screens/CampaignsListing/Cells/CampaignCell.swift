@@ -7,6 +7,9 @@ import RxSwift
  */
 class CampaignCell: UICollectionViewCell {
 
+    /** Used to update contentView.widthAnchor constraint later */
+    private var widthConstraint: NSLayoutConstraint?
+    
     private let disposeBag = DisposeBag()
 
     /** Used to display the campaign's title. */
@@ -45,9 +48,18 @@ class CampaignCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        /** The widthConstraint obtains contentView's widthAnchor LayoutConstraint. */
+        widthConstraint = contentView.widthAnchor.constraint(equalToConstant: 0)
         assert(nameLabel != nil)
         assert(descriptionLabel != nil)
         assert(imageView != nil)
+    }
+    
+    /// Used to update Constraints
+    override func updateConstraints() {
+        // Set width constraint to superview's width.
+        widthConstraint?.constant = superview?.bounds.width ?? 0
+        widthConstraint?.isActive = true
+        super.updateConstraints()
     }
 }

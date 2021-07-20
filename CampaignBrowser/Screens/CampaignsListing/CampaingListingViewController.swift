@@ -17,7 +17,12 @@ class CampaignListingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        /** Enabling dynamic cell sizing */
+        if let flowLayout = typedView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = CGSize(width: typedView.frame.size.width, height: 100)
+        }
+        
         assert(typedView != nil)
     }
 
